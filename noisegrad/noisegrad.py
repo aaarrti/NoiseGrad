@@ -1,13 +1,17 @@
 from __future__ import annotations
 
-from typing import Callable, Literal, NamedTuple
+from typing import Callable, Literal, NamedTuple, Protocol
 
 import torch
 import torch.nn as nn
 from tqdm.auto import tqdm
 
 NoiseType = Literal["multiplicative", "additive"]
-ExplanationFn = Callable[[nn.Module, torch.Tensor, torch.Tensor], torch.Tensor]
+
+
+class ExplanationFn(Protocol):
+
+    def __call__(self, mode: nn.Module, x_batch: torch.Tensor, y_batch: torch.Tensor, *args, **kwargs) -> torch.Tensor: ...
 
 
 class NoiseGradConfig(NamedTuple):
