@@ -1,25 +1,30 @@
 name: Run Tests
 
-on: [ push ]
+on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
-  build:
-
+  test:
+    name: test ${{ matrix.py }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ "3.9", "3.10" ]
-
+        py:
+          - "3.10"
+          - "3.9"
+          - "3.8"
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Setup python for test ${{ matrix.py }}
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          pip install tox
-      - name: Test with pytest
-        run: |
-          tox
+          cache: 'pip'
+          python-version: ${{ matrix.py }}
+      - uses: actions/checkout@v3
+      - name: Install tox-gh
+        run: pip install tox-gh
+      - name: Setup test suite
+        run: tox run -vv --notest
+      - name: Run test suite
+        run: tox run --skip-pkg-install
+        env:
+          PYTEST_ADDOPTS: "-vv -s"
