@@ -1,19 +1,13 @@
 from __future__ import annotations
 
-from typing import Protocol, Literal, NamedTuple, Optional
-import torch
-from tqdm.auto import tqdm
-import torch.nn as nn
+from typing import Callable, Literal, NamedTuple, Optional, Sequence
 
+import torch
+import torch.nn as nn
+from tqdm.auto import tqdm
 
 NoiseType = Literal["multiplicative", "additive"]
-
-
-class ExplanationFn(Protocol):
-    def __call__(
-        self, model: nn.Module, x_batch: torch.Tensor, y_batch: torch.Tensor
-    ) -> torch.Tensor:
-        ...
+ExplanationFn = Callable[[nn.Module, torch.Tensor, torch.Tensor], torch.Tensor]
 
 
 class NoiseGradConfig(NamedTuple):
@@ -68,7 +62,7 @@ class NoiseGradPlusPlusConfig(NamedTuple):
 
 
 class NoiseGrad:
-    def __init__(self, config: Optional[NoiseGradConfig] = None):
+    def __init__(self, config: NoiseGradConfig | None = None):
         """
         Parameters
         ----------
@@ -144,7 +138,7 @@ class NoiseGrad:
 
 
 class NoiseGradPlusPlus(NoiseGrad):
-    def __init__(self, config: Optional[NoiseGradPlusPlusConfig] = None):
+    def __init__(self, config: NoiseGradPlusPlusConfig | None = None):
         if config is not None:
             ng_config = NoiseGradConfig(
                 n=config.n,
@@ -183,7 +177,6 @@ class NoiseGradPlusPlus(NoiseGrad):
             Batch of labels, which is subject to explanation.
         explanation_fn:
             Function used to generate baseline explanations. Takes model, batch of input, batch of labels as args.
-
         Returns
         -------
 
