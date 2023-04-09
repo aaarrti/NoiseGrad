@@ -16,6 +16,8 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
   mypy:
+    runs-on: ubuntu-latest
+    name: MyPy
     steps:
       - name: Check out source repository
         uses: actions/checkout@v3
