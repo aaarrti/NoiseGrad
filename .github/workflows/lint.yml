@@ -37,7 +37,7 @@ jobs:
       - name: Install tox-gh
         run: pip install tox-gh
       - name: Setup tox environment
-        run: tox run -e type --notest
+        run: tox run -e lint --notest
       - name: Run mypy
         uses: aaarrti/tox-flake8-lint-action@v1
         with:
