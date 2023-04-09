@@ -121,6 +121,11 @@ test = [
     "noisegrad[examples]",
     "pytest"
 ]
+lint = [
+    "noisegrad[examples]",
+    "flake8",
+    "mypy"
+]
 
 # List URLs that are relevant to your project
 #
