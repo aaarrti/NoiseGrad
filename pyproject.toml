@@ -87,8 +87,6 @@ classifiers = [# Optional
     "Intended Audience :: Science/Research",
     "Intended Audience :: Developers",
     # Pick your license as you wish
-    "Topic :: Scientific :: Explainable Artificial Intelligence",
-    "Topic :: Scientific :: XAI",
     "Programming Language :: Python :: 3 :: Only",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
