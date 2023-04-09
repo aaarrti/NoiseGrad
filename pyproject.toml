@@ -83,9 +83,9 @@ classifiers = [# Optional
     #   5 - Production/Stable
     "Development Status :: 3 - Alpha",
     # Indicate who your project is intended for
-    "Intended Audience :: Science/Research",
+    "Intended Audience :: Research",
+    "Intended Audience :: Science",
     # Pick your license as you wish
-    "License :: GNU LESSER GENERAL PUBLIC LICENSE VERSION 3",
     "Topic :: Scientific :: Explainable Artificial Intelligence",
     "Topic :: Scientific :: XAI",
 ]
