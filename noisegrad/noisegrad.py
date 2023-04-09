@@ -103,7 +103,7 @@ class NoiseGrad:
         inputs: torch.Tensor,
         targets: torch.Tensor,
         explanation_fn: ExplanationFn,
-    ) -> torch.Tensor:
+    ) -> int:
         """
 
         Parameters
