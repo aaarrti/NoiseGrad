@@ -18,7 +18,7 @@ if util.find_spec("captum"):
         targets: torch.Tensor,
         normalize: bool = False,
         **kwargs,
-    ) -> np.array:
+    ) -> np.ndarray:
         """Implementation of InteGrated Gradients by Sundararajan et al., 2017 using Captum."""
 
         assert (
@@ -50,7 +50,7 @@ if util.find_spec("captum"):
         abs: bool = True,
         normalize: bool = False,
         **kwargs,
-    ) -> np.array:
+    ) -> np.ndarray:
         """Implementation of InteGrated Gradients by Sundararajan et al., 2017 using Captum."""
 
         assert (
