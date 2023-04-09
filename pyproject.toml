@@ -159,3 +159,9 @@ packages = [
 # https://pip.pypa.io/en/stable/reference/pip/#pep-517-and-518-support
 requires = ["flit-core >= 3.4"]
 build-backend = "flit_core.buildapi"
+
+
+[tool.mypy]
+mypy_path = "noisegrad/"
+ignore_missing_imports = true
+plugins = ["numpy.typing.mypy_plugin"]
