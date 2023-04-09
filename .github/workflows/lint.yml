@@ -19,7 +19,7 @@ jobs:
       - name: Prepare MyPy ENV
         run: pip install .[lint]
       - name: Run mypy
-        uses: github.com/aaarrti/mypy-github-action
+        uses: aaarrti/mypy-github-action
         with:
           checkName: Lint   # NOTE: this needs to be the same as the job name
         env:
