@@ -17,10 +17,13 @@ jobs:
       #- name: flake8 Lint
       #  uses: py-actions/flake8@v2
       - name: Prepare MyPy ENV
-        run: pip install .[lint]
+        run: |
+          pip install tox
+          tox run -e type --no-test
       - name: Run mypy
         uses: aaarrti/mypy-github-action@v2
         with:
           checkName: Lint   # NOTE: this needs to be the same as the job name
+          cmd: "tox run -e type"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
