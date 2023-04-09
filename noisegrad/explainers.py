@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from importlib import util
-from typing import Optional
 
 import numpy as np
 import torch

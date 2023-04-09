@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Literal, NamedTuple, Optional, Sequence
+from typing import Callable, Literal, NamedTuple
 
 import torch
 import torch.nn as nn
