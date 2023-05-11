@@ -11,8 +11,8 @@ NoiseType = Literal["multiplicative", "additive"]
 
 @runtime_checkable
 class ExplanationFn(Protocol):
+    @staticmethod
     def __call__(
-        self,
         mode: nn.Module,
         x_batch: torch.Tensor,
         y_batch: torch.Tensor,
@@ -74,7 +74,7 @@ class NoiseGradPlusPlusConfig(NamedTuple):
 
 
 class NoiseGrad:
-    def __init__(self, config: NoiseGradConfig | Mapping | None = None):
+    def __init__(self, config: NoiseGradConfig | Mapping[str, ...] | None = None):
         """
         Parameters
         ----------
@@ -152,7 +152,9 @@ class NoiseGrad:
 
 
 class NoiseGradPlusPlus(NoiseGrad):
-    def __init__(self, config: NoiseGradPlusPlusConfig | Mapping | None = None):
+    def __init__(
+        self, config: NoiseGradPlusPlusConfig | Mapping[str, ...] | None = None
+    ):
         config = config_from_dict(config, NoiseGradPlusPlusConfig)
         if config is not None:
             ng_config = NoiseGradConfig(
@@ -226,8 +228,10 @@ class NoiseGradPlusPlus(NoiseGrad):
 FusionGrad = NoiseGradPlusPlus
 
 
-def config_from_dict(dictionary, clazz):
+def config_from_dict(
+    dictionary: Mapping[str, ...], clazz
+) -> NoiseGradConfig | NoiseGradPlusPlusConfig:
     if isinstance(dictionary, Mapping):
         return clazz(**dictionary)
     else:
-        return dictionary
+        return dictionary  # noqa
